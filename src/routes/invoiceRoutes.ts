@@ -1,0 +1,16 @@
+import { Router } from "express";
+import InvoiceControllers from "../controllers/InvoiceControllers";
+import { verifyAccessToken } from "../middleware/verify";
+const router=Router();
+router.use(verifyAccessToken);
+router.get("/get/:branchId",InvoiceControllers.getInvoice);
+router.get("/getById/:id",InvoiceControllers.getInvoiceById);
+router.get("/getSales/:branchId",InvoiceControllers.getInvoiceSeals);
+router.get("/getReturnSales/:branchId",InvoiceControllers.getInvoiceReturnSeals);
+router.get("/getPurchases/:branchId",InvoiceControllers.getInvoicePurchases);
+router.get("/getReturnPurchases/:branchId",InvoiceControllers.getInvoiceReturnPurchases);
+router.post("/create",InvoiceControllers.createInvoice);
+router.put('/edit',InvoiceControllers.updateInvoice);
+router.delete('/delete',InvoiceControllers.deleteInvoice);
+router.get("/getReport/:branchId/:type/:startDate/:endDate",InvoiceControllers.getReport);
+export default router;

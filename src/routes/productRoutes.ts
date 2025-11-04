@@ -1,0 +1,12 @@
+import {Router} from 'express';
+import productControllers from '../controllers/productControllers';
+import { createProductValidation,getProductValidation,updateProductValidation,deleteProductValidation } from '../validations/productValidation';
+import { handleValidationErrors } from '../middleware/handleValidation';
+import { verifyAccessToken } from '../middleware/verify';
+const router=Router();
+router.use(verifyAccessToken);
+router.get("/getProduct/:branchId",productControllers.getProduct);
+router.post("/createProduct",createProductValidation,handleValidationErrors,productControllers.createProduct);
+router.put("/editProduct",updateProductValidation,handleValidationErrors,productControllers.editProduct);
+router.delete("/deleteProduct/:id",productControllers.deleteProduct);
+export default router;
